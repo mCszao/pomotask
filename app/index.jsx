@@ -105,6 +105,7 @@ const styles = StyleSheet.create({
   },
   tasks: {
     backgroundColor: "#7D70BA80",
+    maxHeight: "50%",
     width: "80%",
     borderRadius: 12,
     borderWidth: 2,

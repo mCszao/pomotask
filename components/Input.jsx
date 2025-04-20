@@ -20,7 +20,7 @@ export default function Input({ onAdd }) {
                 placeholder="Digite uma tarefa..."
             />
             <Pressable onPress={handleButton} style={styles.button}>
-                <Text style={styles.buttonText}>+</Text>
+                <Text style={styles.buttonText}>Salvar</Text>
             </Pressable>
         </View>
     );
@@ -37,7 +37,7 @@ const styles = StyleSheet.create({
         borderRadius: 10,
         fontSize: 18,
         color: '#000000',
-        backgroundColor: '#FFFFFF'
+        backgroundColor: '#CCC'
     },
     button: {
         padding: 12,
@@ -48,6 +48,6 @@ const styles = StyleSheet.create({
     buttonText: {
         fontSize: 18,
         color: '#FFFFFF',
-        fontWeight: "bold",
+        fontWeight: "50",
     }
 });

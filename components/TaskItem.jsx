@@ -29,7 +29,7 @@ const styles = StyleSheet.create({
         backgroundColor: '#CCC',
         padding: 20,
         margin: 10,
-        borderRadius: 10
+        borderRadius: 10,
     },
     text: {
         flex: 1,
@@ -43,7 +43,7 @@ const styles = StyleSheet.create({
         backgroundColor: '#FFF'
     },
     checked: {
-        backgroundColor: '#000'
+        backgroundColor: '#7D70BA'
     },
     unchecked: {
         backgroundColor: '#FFF'
