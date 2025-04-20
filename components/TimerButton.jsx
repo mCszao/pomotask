@@ -10,11 +10,15 @@ export default function TimerButton({isRunning, func}) {
 
 const styles = StyleSheet.create({
     buttonOn: {
+        marginTop: 25,
+        marginBottom: 30,
         backgroundColor: "#5BC0EB",
         padding: 10,
         borderRadius: 32, 
       },
       buttonOff: {
+        marginTop: 25,
+        marginBottom: 30,
         backgroundColor: "#212738",
         padding: 10,
         borderRadius: 32, 

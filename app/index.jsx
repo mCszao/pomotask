@@ -1,53 +1,19 @@
 import { useRef, useState } from "react";
 import Timer from "../components/Timer"
-import {Image, ScrollView, StyleSheet, Text, View } from "react-native";
+import {Image, ScrollView, StyleSheet, Text, TextInput, View } from "react-native";
 import TimerButton from './../components/TimerButton';
 import ActionButton from "./../components/ActionButton";
 import stages from "../data-stage";
+import Input from './../components/Input';
+import TaskItem from './../components/TaskItem';
 
 export default function Index() {
   const [timerType, setTimerType] = useState(stages[0]);
   const [seconds, setSeconds] = useState(stages[0].initialValue);
   const [start, setStart] = useState(false);
   const timer = useRef(null);
-  const taskList = [
-    {
-      description: "Apenas descricao",
-      concluded: false
-    },
-    {
-      description: "Apenas descricao",
-      concluded: false
-    },
-    {
-      description: "Apenas descricao",
-      concluded: false
-    },
-    {
-      description: "Apenas descricao",
-      concluded: false
-    },
-    {
-      description: "Apenas descricao",
-      concluded: false
-    },
-    {
-      description: "Apenas descricao",
-      concluded: false
-    },
-    {
-      description: "Apenas descricao",
-      concluded: false
-    },
-    {
-      description: "Apenas descricao",
-      concluded: false
-    },
-    {
-      description: "Apenas descricao",
-      concluded: false
-    }
-  ];
+  const [formTask, setFormTask] = useState(null);
+  const [tasks, setTasks] = useState([]);
   function changeTimerType(s) {
     if(s.id == timerType.id) {
       return;
@@ -80,20 +46,43 @@ export default function Index() {
       setStart(false);
     }
   }
+  function handleAdd(newTask) {
+    setTasks([...tasks, { label: newTask, done: false }]);
+  }
+  function handleDelete(taskName) {
+    const index = tasks.findIndex(item => item.label === taskName);
+    if (index > -1) {
+        const listClone = [...tasks];
+        listClone.splice(index, 1);
+        setTasks(listClone);
+    }
+  }
+
+  function handleDoneUpdate(taskName) {
+    const index = tasks.findIndex(item => item.label === taskName);
+    if (index > -1) {
+        const listClone = [...tasks];
+        listClone[index].done = !listClone[index].done;
+        setTasks(listClone);
+    }
+}
   return (
     <View
       style={styles.container}
     >
       <Text style={styles.bold}>PomoTask</Text>
       <ScrollView style={styles.tasks}>
-        {taskList.map((task, index) => (
-          <View key={index} style={styles.taskItem}>
-            <Text>Tarefa {index + 1}</Text>
-            <Text>{task.description}</Text>
-          </View>
+      <Input onAdd={handleAdd} />
+        {tasks.map((task, index) => (
+          <TaskItem
+            key={index}
+            task={task}
+            onDelete={handleDelete}
+            onDoneUpdate={handleDoneUpdate}
+        />
         ))}
       </ScrollView>
-      <View style={styles.actions}>
+      <ScrollView style={styles.actions}>
         <View style={styles.stages}>
           {stages.map(stage => (
             <ActionButton key={stage.id} displayName={stage.displayName} active={stage.id == timerType.id} change={() => changeTimerType(stage)}/>
@@ -101,7 +90,7 @@ export default function Index() {
         </View>
         <Timer timerValue={seconds}/>
        <TimerButton isRunning={start} func={startTimer}/>
-      </View>
+      </ScrollView>
       <Text style={styles.bold}>Paueréd by @mcszao</Text>
     </View>
   );
@@ -130,12 +119,10 @@ const styles = StyleSheet.create({
     paddingVertical: 24,
     paddingHorizontal: 24,
     backgroundColor: "#7D70BA80",
-    width: "80%",
-    height: "30%",
     borderRadius: 32,
     borderWidth: 2,
+    maxHeight: "30%",
     borderColor: "#7D70BA",
-    gap: 25
   },
   stages: {
     flexDirection: "row",
