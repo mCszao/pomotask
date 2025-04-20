@@ -90,7 +90,7 @@ export default function Index() {
         <Timer timerValue={seconds}/>
        <TimerButton isRunning={start} func={startTimer}/>
       </ScrollView>
-      <Text style={styles.bold}>Paueréd by @mcszao</Text>
+      <Text style={styles.bold}>Poueréd by @mcszao</Text>
     </View>
   );
 }
