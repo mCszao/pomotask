@@ -12,7 +12,6 @@ export default function Index() {
   const [seconds, setSeconds] = useState(stages[0].initialValue);
   const [start, setStart] = useState(false);
   const timer = useRef(null);
-  const [formTask, setFormTask] = useState(null);
   const [tasks, setTasks] = useState([]);
   function changeTimerType(s) {
     if(s.id == timerType.id) {
